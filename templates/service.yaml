@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: komiser
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer    # If deploying to production, Service type LoadBalancer is not recommended. Choose either ClusterIP or NodePort (not internet facing)
+  selector:
+    app: komiser

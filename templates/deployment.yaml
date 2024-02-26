@@ -1,0 +1,30 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: komiser
+spec:
+  selector: 
+    matchLabels: 
+      app: komiser
+  template: 
+    metadata: 
+      name: komiser
+      labels: 
+        app: komiser
+    spec:
+      serviceAccountName: komiser
+      volumes:
+      - name: cloud-account-configmap
+        configMap:
+          name: komiser
+      containers: 
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+            - start 
+            - "--config"
+            - "/root/.aws/credentials"
+          volumeMounts:
+            - name: cloud-account-configmap
+              mountPath: /root/.aws/

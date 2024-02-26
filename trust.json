@@ -1,0 +1,18 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::985504043303:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/DE5676F95D90D9BBE9F416D6CCF82002"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/DE5676F95D90D9BBE9F416D6CCF82002:aud": "sts.amazonaws.com",
+          "oidc.eks.us-east-1.amazonaws.com/id/DE5676F95D90D9BBE9F416D6CCF82002:sub": "system:serviceaccount:komiser:komiser"
+        }
+      }
+    }
+  ]
+}
